@@ -128,8 +128,6 @@ int main(int argc, string argv[])
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
-    // TODO
-
     //look for candidate called name
     //if found, update preferences so that they are the (voter)'s (rank) preference and return true
     for (int i = 0; i < candidate_count; i++)
@@ -148,8 +146,6 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
-
     //update vote counts for all non-eliminated candidates
 
     for (int j = 0; j < 1; j++)
@@ -181,8 +177,6 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
-
     //if any candidate has more than half the vote, print their name and return true
 
     int votesneeded = voter_count / 2 + 0.5;
@@ -204,7 +198,6 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
-    // TODO
     //initialize a, will use this as the min vote count. start it as the total number of voters
     int a = voter_count;
 
@@ -224,8 +217,6 @@ int find_min(void)
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
-    // TODO
-
     //input is minimum number of votes, int min
 
     for (int i = 0; i < candidate_count; i++)
@@ -241,18 +232,16 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
-    // TODO
-
     //eliminate anyone still in the race who has the min number of votes, which is what we calculated in find_min
 
     for (int i = 0; i < candidate_count; i++)
         // if candidate's votes are equal to or less than minimum votes, change .eliminated to true
-        
+
         if (!candidates[i].eliminated)
         {
             if (candidates[i].votes == min)
             {
-                candidates[i].eliminated = true;   
+                candidates[i].eliminated = true;
             }
         }
     return;
