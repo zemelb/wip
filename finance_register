@@ -1,0 +1,44 @@
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """Register user"""
+
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        # Take input for username
+        username = request.form.get("username")
+
+        #If username is blank return apology
+        if not username:
+            return apology("You must enter a username.")
+
+        # Checks to see if username exists already, if so return apology
+        usernamecheck = db.execute("SELECT * FROM users WHERE username = :username")
+
+        if len(usernamecheck) == 1:
+            return apology("Username already exists.")
+
+        # Take input for password
+        password = request.form.get("password")
+
+        # if password is blank, return apology
+        if not password:
+            return apology("You must enter a password.")
+
+        # Take input for confirmation
+        confirmation = request.form.get("confirmation")
+
+        # if confirmation is blank, return apology
+        if not confirmation:
+            return apology("You must confirm your password.")
+
+        # if password and confirmation don't match, return apology
+        if password != confirmation:
+            return apology("Your password confirmation does not match the password.")
+
+        # hash the password with generate_password_hash
+        pwhash = generate_password_hash(request.form.get("password"))
+
+        # insert the username and hash into the users table
+        db.execute("INSERT INTO users (username, pwhash VALUES (:username, :pwhash), username = username, pwhash = pwhash)")
+        return redirect("/")
